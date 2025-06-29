@@ -1,4 +1,4 @@
-import { Button, Progress } from '@mantine/core';
+import { Progress } from '@mantine/core';
 // import as * styles from './button.css';
 
 function CustomButton() {
