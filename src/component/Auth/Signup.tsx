@@ -1,8 +1,17 @@
 import { useForm } from '@mantine/form';
-import { TextInput, Button, PasswordInput, } from '@mantine/core';
+import { TextInput, Button, PasswordInput, Loader, } from '@mantine/core';
+import { useCreateUserMutation } from '../../store/api/userApi';
 
 
 export function SignupForm() {
+    const [createUser, { isLoading }] = useCreateUserMutation();
+    console.log(`is1`, isLoading);
+    if (isLoading) {
+        // <p>kkkkkkkkkkkkk</p>
+        < Loader color="red" size="xl" type="bars" />;
+    }
+
+
     const form = useForm({
         mode: 'controlled',
         validateInputOnChange: true,
@@ -17,13 +26,28 @@ export function SignupForm() {
         validate: {
             name: (value) => (value.length < 2 ? 'Name must have at least 2 letters' : null),
             email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+            password: (value) => (value.length < 6 ? 'Password must have at least 6 letters' : null),
             confirmPassword: (value, values) =>
                 value !== values.password ? 'Passwords did not match' : null,
         },
     });
 
+    const handleSumbit = async (values: typeof form.values) => {
+        console.log(`gggggg`, values);
+        const { name, email, password } = values;
+        const data = {
+            name,
+            email,
+            password
+        }
+        const response = createUser(data)
+        console.log(response);
+
+    };
+
+
     return (
-        <form onSubmit={form.onSubmit(console.log)}>
+        <form onSubmit={form.onSubmit(handleSumbit)}>
             <TextInput
                 withAsterisk
                 label="Name"

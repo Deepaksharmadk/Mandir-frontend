@@ -15,17 +15,17 @@ const primaryColor: MantineColorsTuple = [
 ];
 
 export const theme = createTheme({
-    colors: { primary: primaryColor },
-    primaryColor: "primary",
-    defaultRadius: "md",
-    fontFamily: "Inter, system-ui, -apple-system, sans-serif",
-    headings: {
-        fontFamily: "Inter, system-ui, -apple-system, sans-serif",
-        fontWeight: "600",
-    },
-    components: {
-        Button: { defaultProps: { radius: "md" } },
-        TextInput: { defaultProps: { radius: "md" } },
-        Card: { defaultProps: { radius: "md" } },
-    },
+    // colors: { primary: primaryColor },
+    // primaryColor: "primary",
+    // defaultRadius: "md",
+    // fontFamily: "Inter, system-ui, -apple-system, sans-serif",
+    // headings: {
+    //     fontFamily: "Inter, system-ui, -apple-system, sans-serif",
+    //     fontWeight: "600",
+    // },
+    // components: {
+    //     Button: { defaultProps: { radius: "md" } },
+    //     TextInput: { defaultProps: { radius: "md" } },
+    //     Card: { defaultProps: { radius: "md" } },
+    // },
 });

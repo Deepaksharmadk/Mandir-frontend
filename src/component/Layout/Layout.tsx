@@ -1,6 +1,8 @@
 import { AppShell, Container } from '@mantine/core';
 import { Header } from '../Header/Header';
 import { Outlet } from 'react-router-dom';
+import { CarouselDemo } from '../Carousel/CarouselComponent';
+import { Navbar } from '../../navbar/Navbar';
 
 
 
@@ -11,14 +13,18 @@ export function Layout() {
             padding={0}
         >
             <AppShell.Header>
-                <Header />
+                {/* <Header /> */}
+                <Navbar />
             </AppShell.Header>
 
 
 
 
+
             <AppShell.Main pt={70}>
+                {/* <CarouselDemo /> */}
                 <Container size="xl" py="xl">
+
                     <Outlet />
                 </Container>
             </AppShell.Main>

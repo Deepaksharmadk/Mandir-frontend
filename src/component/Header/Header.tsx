@@ -153,7 +153,7 @@ export function Header() {
                             <ActionIcon variant="subtle" size="lg">
                                 <IconBell size={20} stroke={1.5} />
                             </ActionIcon>
-                        </Indicator> */}
+                       </Indicator> */}
                         {/* signup */}
                         <LoginBtn />
                         {/* User Menu */}
