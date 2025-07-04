@@ -32,6 +32,7 @@ export const imageApi = baseApi.injectEndpoints({
                 method: "GET",
             }),
             providesTags: [{ type: "Image", id: "LIST" }],
+            keepUnusedDataFor: 300, // in seconds (5 mins)
         }),
 
         // (Optional) add other endpoints like createImage, deleteImage, etc.
