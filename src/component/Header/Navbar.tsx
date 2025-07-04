@@ -9,7 +9,7 @@ import {
     IconOm,
 } from '@tabler/icons-react';
 import {
-    Anchor,
+    // Anchor,
     Box,
     Burger,
     Button,
@@ -108,7 +108,7 @@ export function Navbar() {
             <header className={classes.header}>
                 <Group justify="space-between" h="100%">
                     <Group gap="xs" align="center">
-                        <IconOm size={30} />
+                        <IconOm size={30} color='#FF7722' />
                         <Text
                             size="md"
 
@@ -121,14 +121,20 @@ export function Navbar() {
                     </Group>
 
                     <Group h="100%" gap={0} visibleFrom="sm">
-                        <Link to="/" >
-                            <Button size='sm' variant="light" color=' #FF7722'>About</Button>
-                        </Link>
+                        <Button
+                            component={Link}
+                            to="/dee"
+                            size="sm"
+                            variant="light"
+                            color="#FF7722"
+                        >
+                            Home
+                        </Button>
                         <HoverCard width={600} position="bottom" radius="md" shadow="md" withinPortal>
                             <HoverCard.Target>
                                 <a href="#" className={classes.link}>
                                     <Center inline>
-                                        <Box component="span" mr={5}>
+                                        <Box style={{ color: '#FF7722', }} component="span" mr={5}>
                                             Features
                                         </Box>
                                         <IconChevronDown size={16} color={theme.colors.blue[6]} />
@@ -138,10 +144,8 @@ export function Navbar() {
 
                             <HoverCard.Dropdown style={{ overflow: 'hidden' }}>
                                 <Group justify="space-between" px="md">
-                                    <Text fw={500}>Features</Text>
-                                    <Anchor href="#" fz="xs">
-                                        View all
-                                    </Anchor>
+                                    <Text color=' #FF7722' fw={500}>Features</Text>
+
                                 </Group>
 
                                 <Divider my="sm" />
@@ -151,30 +155,44 @@ export function Navbar() {
                                 </SimpleGrid>
 
                                 <div className={classes.dropdownFooter}>
-                                    <Group justify="space-between">
+                                    {/* <Group justify="space-between">
                                         <div>
-                                            <Text fw={500} fz="sm">
+                                            <Text color=' #FF7722' fw={500} fz="sm">
                                                 Get started
                                             </Text>
-                                            <Text size="xs" c="dimmed">
+                                            <Text color=' #FF7722' size="xs" c="dimmed">
                                                 Their food sources have decreased, and their numbers
                                             </Text>
                                         </div>
                                         <Button variant="default">Get started</Button>
-                                    </Group>
+                                    </Group> */}
                                 </div>
                             </HoverCard.Dropdown>
                         </HoverCard>
-                        <Link to="/" >
-                            <Button size='sm' variant="light" color=' #FF7722'>about</Button>
-                        </Link>
-                        {/* <a href="#" className={classes.link}>
-                            Academy
-                        </a> */}
+                        <Button
+                            component={Link}
+                            to="/dee"
+                            size="sm"
+                            variant="light"
+                            color="#FF7722"
+                            mr={7}
+                        >
+                            About
+                        </Button>
+                        <Button
+                            component={Link}
+                            to="/dee"
+                            size="sm"
+                            variant="light"
+                            color="#FF7722"
+                        >
+                            Gallery
+                        </Button>
+
                     </Group>
 
 
-                    <Group visibleFrom="sm">
+                    <Group gap={10} align="center" >
                         <DarkLightmode />
                         <LoginBtn />
                         {/* <Button>Sign up</Button> */}
@@ -196,15 +214,22 @@ export function Navbar() {
                 <ScrollArea h="calc(100vh - 80px" mx="-md">
                     <Divider my="sm" />
 
-                    <Link to="/" >
-                        <Button size='sm' variant="light" color=' #FF7722'>about</Button>
-                    </Link>
+                    <Button
+                        component={Link}
+                        to="/"
+                        size="sm"
+                        variant="light"
+                        color="#FF7722"
+                        w={'100%'}
+                    >
+                        Home
+                    </Button>
                     <UnstyledButton className={classes.link} onClick={toggleLinks}>
                         <Center inline>
-                            <Box component="span" mr={5}>
+                            <Box component="span" color=' #FF7722' mr={5}>
                                 Features
                             </Box>
-                            <IconChevronDown size={16} color={theme.colors.blue[6]} />
+                            <IconChevronDown size={16} color=' #FF7722' />
                         </Center>
                     </UnstyledButton>
                     <Collapse in={linksOpened}>{links}</Collapse>
@@ -219,7 +244,7 @@ export function Navbar() {
 
                     <Group justify="center" grow pb="xl" px="md">
                         <Button variant="default">Log in</Button>
-                        <Button>Sign up</Button>
+                        {/* <Button>Sign up</Button> */}
                     </Group>
                 </ScrollArea>
             </Drawer>

@@ -1,6 +1,7 @@
 import { AppShell, Container } from '@mantine/core';
 import { Outlet } from 'react-router-dom';
 import { Navbar } from '../Header/Navbar';
+import { CarouselDemo } from '../Auth/CarouselComponent';
 
 
 
@@ -20,7 +21,7 @@ export function Layout() {
 
 
             <AppShell.Main pt={70}>
-                {/* <CarouselDemo /> */}
+                <CarouselDemo />
                 <Container size="xl" py="xl">
 
                     <Outlet />

@@ -6,5 +6,5 @@ export const baseApi = createApi({
     reducerPath: "baseApi",
     baseQuery: axiosBaseQuery(),
     endpoints: () => ({}), // Initialize with empty endpoints
-    tagTypes: ["User", "Post"], // Define global tag types
+    tagTypes: ["User", "Post", "Image"], // Define global tag types
 });

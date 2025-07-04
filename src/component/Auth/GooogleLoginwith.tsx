@@ -29,8 +29,10 @@ import { IconCheck, IconChecks } from '@tabler/icons-react';
 import { useRef } from 'react';
 import type { AuthResponse } from '../../store/api/userApi'
 import { notifications } from '@mantine/notifications';
+import { useNavigate } from 'react-router-dom';
 
-export function AuthenticationForm(props: PaperProps) {
+export function AuthenticationForm({ onClose, ...props }: PaperProps & { onClose?: () => void }) {
+    const navigate = useNavigate()
     const googleRef = useRef<HTMLDivElement>(null);
     const dispatch = useDispatch<AppDispatch>()
 
@@ -77,8 +79,8 @@ export function AuthenticationForm(props: PaperProps) {
                 picture: result.user.picture || '',
                 role: result.user.role || 'User',
             }))
-            // navigate('/') or close modal here
-            // TODO: navigate to home
+            onClose?.(); // ✅ Close modal
+            navigate('/')
         } catch (err) {
             console.error('Google login failed', err)
         }
@@ -93,6 +95,8 @@ export function AuthenticationForm(props: PaperProps) {
                     password: values.password,
                     name: values.name,
                 });
+                onClose?.(); // ✅ Close modal
+                navigate('/');
                 if ('data' in response && response.data) {
                     result = response.data;
                     // console.log(`register result`, result);
@@ -122,6 +126,7 @@ export function AuthenticationForm(props: PaperProps) {
                     email: values.email,
                     password: values.password,
                 }).unwrap()
+
                 dispatch(setUser({
                     _id: result.user.id,
                     name: result.user.name,
@@ -129,6 +134,9 @@ export function AuthenticationForm(props: PaperProps) {
                     picture: result.user.picture || '',
                     role: result.user.role || 'User',
                 }))
+                console.log('Navigating to /');
+                onClose?.(); // ✅ Close modal
+                navigate('/login');
                 // Show success toast or redirect
                 notifications.show({
                     title: result?.massage || 'Login Successfully',
@@ -136,6 +144,7 @@ export function AuthenticationForm(props: PaperProps) {
                     color: 'green',
                     icon: <IconCheck />,
                 });
+                navigate('/');
 
             }
         } catch (loginErr: unknown) {
