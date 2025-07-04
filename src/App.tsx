@@ -1,7 +1,7 @@
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Layout } from './component/Layout/Layout'
-import { CarouselDemo } from './component/Auth/CarouselComponent'
+import { CarouselDemo } from './component/Carousel/CarouselComponent'
 import { AuthenticationForm } from './component/Auth/GooogleLoginwith'
 
 function App() {
