@@ -1,8 +1,7 @@
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Layout } from './component/Layout/Layout'
-import { SignupForm } from './component/Auth/Signup'
-import { CarouselDemo } from './component/Carousel/CarouselComponent'
+import { CarouselDemo } from './component/Auth/CarouselComponent'
 
 function App() {
 
@@ -13,7 +12,7 @@ function App() {
                     <Route path="/" element={<Layout />} >
                         <Route path="/about" element={<p>About</p>} />
                         <Route path="/gallery" element={<CarouselDemo />} />
-                        <Route path="/login" element={<SignupForm />} />
+                        {/* <Route path="/login" element={<SignupForm />} /> */}
 
 
                     </Route>

@@ -1,22 +1,22 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { axiosInstance } from "./axiosInstance";
 
-export async function loginWithGoogle(idToken: string) {
+export async function loginWithGoogle(idToken: string | null) {
     try {
-        const response = axiosInstance.post(
+        // await the request and pull out .data in one step
+        const { data } = await axiosInstance.post(
             "/api/v1/user/google",
             { idToken },
             {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                // include cookies (e.g. HTTP-only cookies set by server)
+                headers: { "Content-Type": "application/json" },
                 withCredentials: true,
             },
         );
-        return response.data;
-    } catch (error) {
-        // you can inspect error.response for status / payload
-        console.error("Google login failed:", error);
+
+        return data;
+    } catch (error: any) {
+        console.error("Google login failed:", error.response ?? error);
+        // rethrow or wrap the error however you like
         throw error;
     }
 }

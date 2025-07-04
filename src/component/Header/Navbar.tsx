@@ -30,9 +30,10 @@ import { useDisclosure } from '@mantine/hooks';
 // import { MantineLogo } from '@mantinex/mantine-logo';
 import classes from './HeaderMegaMenu.module.css';
 import { Link } from 'react-router-dom';
-import DarkLightmode from '../component/Header/DarkLightmode';
-import { LoginBtn } from '../component/Auth/AuthModel';
-
+import DarkLightmode from './DarkLightmode';
+import { LoginBtn } from '../Auth/AuthModel';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../store/store';
 const mockdata = [
     {
         icon: IconCode,
@@ -67,6 +68,8 @@ const mockdata = [
 ];
 
 export function Navbar() {
+    const isLoggedIn = useSelector((state: RootState) => state.user.user)
+    console.log(isLoggedIn, `isLoggedIn`)
     // const pinned = useHeadroom({ fixedAt: 120 });
 
 
@@ -174,7 +177,7 @@ export function Navbar() {
                     <Group visibleFrom="sm">
                         <DarkLightmode />
                         <LoginBtn />
-                        <Button>Sign up</Button>
+                        {/* <Button>Sign up</Button> */}
                     </Group>
 
                     <Burger opened={drawerOpened} onClick={toggleDrawer} hiddenFrom="sm" />

@@ -1,11 +1,12 @@
 // src/lib/axios.ts
 import axios from "axios";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
-console.log(`BASE_URL`, BASE_URL);
+// console.log(`BASE_URL`, BASE_URL);
 const axiosInstance = axios.create({
     baseURL: BASE_URL,
-    timeout: 10000,
+    // timeout: 10000,
     headers: { "Content-Type": "application/json" },
+    withCredentials: true,
 });
 
 // Request interceptor (e.g., add auth token)

@@ -1,8 +1,6 @@
 import { AppShell, Container } from '@mantine/core';
-import { Header } from '../Header/Header';
 import { Outlet } from 'react-router-dom';
-import { CarouselDemo } from '../Carousel/CarouselComponent';
-import { Navbar } from '../../navbar/Navbar';
+import { Navbar } from '../Header/Navbar';
 
 
 

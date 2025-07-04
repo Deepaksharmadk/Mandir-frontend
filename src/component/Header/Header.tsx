@@ -157,55 +157,7 @@ export function Header() {
                         {/* signup */}
                         <LoginBtn />
                         {/* User Menu */}
-                        {/* <Menu
-                            width={260}
-                            position="bottom-start" offset={3} withArrow arrowPosition="center"
-                            transitionProps={{ transition: 'pop-top-right' }}
-                            onClose={() => setUserMenuOpened(false)}
-                            onOpen={() => setUserMenuOpened(true)}
-                            withinPortal
-                        >
-                            <Menu.Target>
-                                <UnstyledButton className={classes.user} data-expanded={userMenuOpened || undefined}>
-                                    <Group gap="sm">
-                                        <Avatar
-                                            src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&dpr=2"
-                                            size={36}
-                                            radius="xl"
-                                        />
-                                        <Text fw={500} size="sm" lh={1} mr={3} visibleFrom="sm">
-                                            John Doe
-                                        </Text>
-                                        <IconChevronDown size={12} stroke={1.5} visibleFrom="sm" />
-                                    </Group>
-                                </UnstyledButton>
-                            </Menu.Target>
-                            <Menu.Dropdown>
-                                <Menu.Item
-                                    leftSection={<IconUser size={16} stroke={1.5} />}
-                                >
-                                    <div>
-                                        <Text fw={500}>John Doe</Text>
-                                        <Text size="xs" c="dimmed">
-                                            john.doe@example.com
-                                        </Text>
-                                    </div>
-                                </Menu.Item>
-
-                                <Menu.Divider />
-
-                                <Menu.Item leftSection={<IconSettings size={16} stroke={1.5} />}>
-                                    Account Settings
-                                </Menu.Item>
-
-                                <Menu.Item
-                                    leftSection={<IconLogout size={16} stroke={1.5} />}
-                                    c="red"
-                                >
-                                    Logout
-                                </Menu.Item>
-                            </Menu.Dropdown>
-                        </Menu> */}
+                       
 
                         {/* Mobile Menu */}
                         <Burger opened={drawerOpened} onClick={toggleDrawer} hiddenFrom="md" />

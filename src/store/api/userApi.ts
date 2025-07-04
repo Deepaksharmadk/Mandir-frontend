@@ -1,125 +1,76 @@
-// src/redux/api/userApi.ts
+// src/store/api/userApi.ts
 import { baseApi } from "./baseApiSlice";
-
-// Define User and Pagination types
-type User = {
-    id: string;
+// Request payload for registration
+export interface RegisterRequest {
     name: string;
     email: string;
-    createdAt: string;
-};
+    password: string;
+}
 
-type PaginationParams = {
-    page: number;
-    limit: number;
-    sortBy?: string;
-    sortOrder?: "asc" | "desc";
-    search?: string;
-};
+// Request payload for login
+export interface LoginRequest {
+    email: string;
+    password: string;
+}
 
-type PaginatedResponse<T> = {
-    data: T[];
-    total: number;
-    page: number;
-    limit: number;
-    totalPages: number;
-};
+// Response type from server after login or register
+export interface AuthResponse {
+    massage: string;
+    user: {
+        id: string;
+        name: string;
+        email: string;
+        picture: string;
+        role: string;
+        // Add other user fields if needed
+    };
+}
 
 export const userApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
-        // CREATE - Create new user
-        createUser: builder.mutation<User, Omit<User, "id">>({
-            query: (newUser) => ({
-                url: "/api/v1/auth/signup",
-                method: "post",
-                data: newUser,
+        getProfile: builder.query<void, void>({
+            query: () => ({
+                url: "/api/v1/auth/profile",
+                method: "GET",
+                // credentials: "include",
+                // Important for sending cookies
             }),
-            // Invalidate user lists
+        }),
+        registerEmail: builder.mutation<AuthResponse, RegisterRequest>({
+            query: (body) => ({
+                url: "/api/v1/auth/signup",
+                method: "POST",
+                data: body,
+                withCredentials: true,
+            }),
             invalidatesTags: [{ type: "User", id: "LIST" }],
         }),
 
-        // READ - Get single user
-        getUser: builder.query<User, string>({
-            query: (userId) => ({
-                url: `/users/${userId}`,
-                method: "get",
+        loginEmail: builder.mutation<AuthResponse, LoginRequest>({
+            query: (body) => ({
+                url: "/api/v1/auth/login",
+                method: "POST",
+                data: body,
+                // withCredentials: true,
             }),
-            providesTags: (result) =>
-                result ? [{ type: "User", id: result.id }] : ["User"],
         }),
-
-        // READ - Get paginated user list
-        getUsers: builder.query<PaginatedResponse<User>, PaginationParams>({
-            query: (params) => ({
-                url: "/users",
-                method: "get",
-                params: {
-                    page: params.page,
-                    limit: params.limit,
-                    sort: params.sortBy,
-                    order: params.sortOrder,
-                    search: params.search,
-                },
+        logoutUser: builder.mutation<AuthResponse, void>({
+            query: () => ({
+                url: "/api/v1/auth/logout",
+                method: "POST",
+                // 🔥 Important: send cookies
+                // withCredentials: true,
+                // withCredentials: true,
+                credentials: "include",
             }),
-            // Provides tag for list invalidation
-            providesTags: (result) => [
-                ...(result?.data || []).map(({ id }) => ({
-                    type: "User" as const,
-                    id,
-                })),
-                { type: "User", id: "LIST" },
-            ],
-        }),
-
-        // UPDATE - Update user
-        updateUser: builder.mutation<User, Partial<User>>({
-            query: (user) => ({
-                url: `/users/${user.id}`,
-                method: "put",
-                data: user,
-            }),
-            invalidatesTags: (result, error, arg) => [
-                { type: "User", id: arg.id },
-                { type: "User", id: "LIST" }, // Invalidate lists
-            ],
-        }),
-
-        // DELETE - Delete user
-        deleteUser: builder.mutation<void, string>({
-            query: (userId) => ({
-                url: `/users/${userId}`,
-                method: "delete",
-            }),
-            invalidatesTags: (result, error, id) => [
-                { type: "User", id },
-                { type: "User", id: "LIST" },
-            ],
-        }),
-
-        // BULK UPDATE (Example)
-        updateUsersStatus: builder.mutation<
-            void,
-            { ids: string[]; status: boolean }
-        >({
-            query: ({ ids, status }) => ({
-                url: "/users/bulk-status",
-                method: "patch",
-                data: { ids, status },
-            }),
-            invalidatesTags: (result, error, arg) => [
-                ...arg.ids.map((id) => ({ type: "User", id })),
-                { type: "User", id: "LIST" },
-            ],
         }),
     }),
+    overrideExisting: false,
 });
 
-// Export hooks for components
 export const {
-    useCreateUserMutation,
-    useGetUserQuery,
-    useGetUsersQuery,
-    useUpdateUserMutation,
-    useDeleteUserMutation,
-    useUpdateUsersStatusMutation,
+    useRegisterEmailMutation,
+    useLoginEmailMutation,
+    useLogoutUserMutation,
+    useGetProfileQuery,
 } = userApi;
