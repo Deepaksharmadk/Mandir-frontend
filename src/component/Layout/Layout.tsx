@@ -23,7 +23,7 @@ export function Layout() {
 
             <AppShell.Main pt={70}>
                 <Outlet />
-                <div style={{ height: '120vh', }}>
+                <div style={{ height: 'auto', }}>
                     <CarouselDemo />
                 </div>
                 <FooterLinks />
