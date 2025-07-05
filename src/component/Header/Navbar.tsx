@@ -1,11 +1,4 @@
 import {
-    IconBook,
-    IconChartPie3,
-    IconChevronDown,
-    IconCode,
-    IconCoin,
-    IconFingerprint,
-    IconNotification,
     IconOm,
 } from '@tabler/icons-react';
 import {
@@ -13,16 +6,11 @@ import {
     Box,
     Burger,
     Button,
-    Center,
-    Collapse,
     Divider,
     Drawer,
     Group,
     ScrollArea,
     Text,
-    ThemeIcon,
-    UnstyledButton,
-    useMantineTheme,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 // import { MantineLogo } from '@mantinex/mantine-logo';
@@ -30,68 +18,18 @@ import classes from './HeaderMegaMenu.module.css';
 import { Link } from 'react-router-dom';
 import DarkLightmode from './DarkLightmode';
 import { LoginBtn } from '../Auth/AuthModel';
-import { useSelector } from 'react-redux';
-import type { RootState } from '../../store/store';
-const mockdata = [
-    {
-        icon: IconCode,
-        title: 'Open source',
-        description: 'This Pokémon’s cry is very loud and distracting',
-    },
-    {
-        icon: IconCoin,
-        title: 'Free for everyone',
-        description: 'The fluid of Smeargle’s tail secretions changes',
-    },
-    {
-        icon: IconBook,
-        title: 'Documentation',
-        description: 'Yanma is capable of seeing 360 degrees without',
-    },
-    {
-        icon: IconFingerprint,
-        title: 'Security',
-        description: 'The shell’s rounded shape and the grooves on its.',
-    },
-    {
-        icon: IconChartPie3,
-        title: 'Analytics',
-        description: 'This Pokémon uses its flying ability to quickly chase',
-    },
-    {
-        icon: IconNotification,
-        title: 'Notifications',
-        description: 'Combusken battles with the intensely hot flames it spews',
-    },
-];
+// import { useSelector } from 'react-redux';
+// import type { RootState } from '../../store/store';
+
 
 export function Navbar() {
-    const isLoggedIn = useSelector((state: RootState) => state.user.user)
-    console.log(isLoggedIn, `isLoggedIn`)
+    // console.log(isLoggedIn, `isLoggedIn`)
     // const pinned = useHeadroom({ fixedAt: 120 });
 
 
     const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
-    const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
-    const theme = useMantineTheme();
 
-    const links = mockdata.map((item) => (
-        <UnstyledButton className={classes.subLink} key={item.title}>
-            <Group wrap="nowrap" align="flex-start">
-                <ThemeIcon size={34} variant="default" radius="md">
-                    <item.icon size={22} color={theme.colors.blue[6]} />
-                </ThemeIcon>
-                <div>
-                    <Text size="sm" fw={500}>
-                        {item.title}
-                    </Text>
-                    <Text size="xs" c="dimmed">
-                        {item.description}
-                    </Text>
-                </div>
-            </Group>
-        </UnstyledButton>
-    ));
+
 
     return (
         <Box style={{
@@ -121,7 +59,7 @@ export function Navbar() {
                     <Group h="100%" gap={0} visibleFrom="sm">
                         <Button
                             component={Link}
-                            to="/dee"
+                            to="/"
                             size="sm"
                             variant="light"
                             color="#FF7722"
