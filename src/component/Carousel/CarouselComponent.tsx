@@ -1,5 +1,5 @@
 import { Carousel } from '@mantine/carousel';
-import { Box, Image, Loader } from '@mantine/core';
+import { Box, Image } from '@mantine/core';
 import '@mantine/core/styles.css';
 import '@mantine/carousel/styles.css';
 import { useRef } from 'react';
@@ -33,7 +33,7 @@ export function CarouselDemo() {
 
                 ))
             }
-            {/* {slides} */}
+            
         </Carousel >
     );
 }
