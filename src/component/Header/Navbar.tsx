@@ -18,9 +18,7 @@ import {
     Divider,
     Drawer,
     Group,
-    HoverCard,
     ScrollArea,
-    SimpleGrid,
     Text,
     ThemeIcon,
     UnstyledButton,
@@ -130,46 +128,8 @@ export function Navbar() {
                         >
                             Home
                         </Button>
-                        <HoverCard width={600} position="bottom" radius="md" shadow="md" withinPortal>
-                            <HoverCard.Target>
-                                <a href="#" className={classes.link}>
-                                    <Center inline>
-                                        <Box style={{ color: '#FF7722', }} component="span" mr={5}>
-                                            Features
-                                        </Box>
-                                        <IconChevronDown size={16} color={theme.colors.blue[6]} />
-                                    </Center>
-                                </a>
-                            </HoverCard.Target>
 
-                            <HoverCard.Dropdown style={{ overflow: 'hidden' }}>
-                                <Group justify="space-between" px="md">
-                                    <Text color=' #FF7722' fw={500}>Features</Text>
-
-                                </Group>
-
-                                <Divider my="sm" />
-
-                                <SimpleGrid cols={2} spacing={0}>
-                                    {links}
-                                </SimpleGrid>
-
-                                <div className={classes.dropdownFooter}>
-                                    {/* <Group justify="space-between">
-                                        <div>
-                                            <Text color=' #FF7722' fw={500} fz="sm">
-                                                Get started
-                                            </Text>
-                                            <Text color=' #FF7722' size="xs" c="dimmed">
-                                                Their food sources have decreased, and their numbers
-                                            </Text>
-                                        </div>
-                                        <Button variant="default">Get started</Button>
-                                    </Group> */}
-                                </div>
-                            </HoverCard.Dropdown>
-                        </HoverCard>
-                        <Button
+                        <Button ml={7}
                             component={Link}
                             to="/dee"
                             size="sm"
@@ -199,8 +159,8 @@ export function Navbar() {
                     </Group>
 
                     <Burger opened={drawerOpened} onClick={toggleDrawer} hiddenFrom="sm" />
-                </Group>
-            </header>
+                </Group >
+            </header >
 
             <Drawer
                 opened={drawerOpened}
@@ -214,40 +174,41 @@ export function Navbar() {
                 <ScrollArea h="calc(100vh - 80px" mx="-md">
                     <Divider my="sm" />
 
-                    <Button
-                        component={Link}
-                        to="/"
-                        size="sm"
-                        variant="light"
-                        color="#FF7722"
-                        w={'100%'}
-                    >
-                        Home
-                    </Button>
-                    <UnstyledButton className={classes.link} onClick={toggleLinks}>
-                        <Center inline>
-                            <Box component="span" color=' #FF7722' mr={5}>
-                                Features
-                            </Box>
-                            <IconChevronDown size={16} color=' #FF7722' />
-                        </Center>
-                    </UnstyledButton>
-                    <Collapse in={linksOpened}>{links}</Collapse>
-                    <a href="#" className={classes.link}>
-                        Learn
-                    </a>
-                    <a href="#" className={classes.link}>
-                        Academy
-                    </a>
-
-                    <Divider my="sm" />
-
-                    <Group justify="center" grow pb="xl" px="md">
-                        <Button variant="default">Log in</Button>
-                        {/* <Button>Sign up</Button> */}
+                    <Group justify="center" grow pb="sm" px="md">
+                        <Button onClick={closeDrawer}
+                            component={Link}
+                            to="/"
+                            size="sm"
+                            variant="light"
+                            color="#FF7722"
+                        >
+                            Home
+                        </Button>
+                    </Group>
+                    <Group justify="center" grow pb="sm" px="md">
+                        <Button onClick={closeDrawer}
+                            component={Link}
+                            to="/dee"
+                            size="sm"
+                            variant="light"
+                            color="#FF7722"
+                        >
+                            About
+                        </Button>
+                    </Group>
+                    <Group justify="center" grow pb="sm" px="md">
+                        <Button onClick={closeDrawer}
+                            component={Link}
+                            to="/dee"
+                            size="sm"
+                            variant="light"
+                            color="#FF7722"
+                        >
+                            Gallery
+                        </Button>
                     </Group>
                 </ScrollArea>
             </Drawer>
-        </Box>
+        </Box >
     );
 }

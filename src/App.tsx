@@ -23,7 +23,7 @@ function App() {
                         <Route path="/about" element={<p>About</p>} />
                         <Route path="/login" element={<AuthenticationForm />} />
                         <Route path="/gallery" element={<CarouselDemo />} />
-                        {/* <Route path="/login" element={<SignupForm />} /> */}
+                        <Route path="/dee" element={<p>dee</p>} />
 
 
                     </Route>

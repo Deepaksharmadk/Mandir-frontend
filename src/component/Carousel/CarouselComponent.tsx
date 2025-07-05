@@ -1,5 +1,5 @@
 import { Carousel } from '@mantine/carousel';
-import { Box, Image } from '@mantine/core';
+import { Box, Image, Loader } from '@mantine/core';
 import '@mantine/core/styles.css';
 import '@mantine/carousel/styles.css';
 import { useRef } from 'react';
@@ -10,11 +10,14 @@ import { useGetAllImagesQuery } from '../../store/api/imageApi';
 
 
 export function CarouselDemo() {
-    const { data, } = useGetAllImagesQuery();
+    const { data, isLoading } = useGetAllImagesQuery();
     // console.log(`imagedata`, data,);
+
 
     const autoplay = useRef(Autoplay({ delay: 3000 }));
     const allImageUrls = data?.images?.flatMap((img) => img.imageUrl) ?? [];
+
+
 
     return (
         <Carousel withIndicators height='auto' plugins={[autoplay.current]}
