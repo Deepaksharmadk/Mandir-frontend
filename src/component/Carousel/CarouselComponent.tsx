@@ -10,7 +10,11 @@ import { useGetAllImagesQuery } from '../../store/api/imageApi';
 
 
 export function CarouselDemo() {
+<<<<<<< HEAD
     const { data } = useGetAllImagesQuery();
+=======
+    const { data} = useGetAllImagesQuery();
+>>>>>>> 5c31b38d9b543b5cac1a9e49b223266e46c1c684
     // console.log(`imagedata`, data,);
 
 
@@ -33,7 +37,7 @@ export function CarouselDemo() {
 
                 ))
             }
-            {/* {slides} */}
+            
         </Carousel >
     );
 }
