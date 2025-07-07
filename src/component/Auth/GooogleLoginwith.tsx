@@ -30,6 +30,7 @@ import { useRef } from 'react';
 import type { AuthResponse } from '../../store/api/userApi'
 import { notifications } from '@mantine/notifications';
 import { useNavigate } from 'react-router-dom';
+import { ForgetPasswordModel } from './ForgetPasswordModel';
 
 export function AuthenticationForm({ onClose, ...props }: PaperProps & { onClose?: () => void }) {
     const navigate = useNavigate()
@@ -226,6 +227,9 @@ export function AuthenticationForm({ onClose, ...props }: PaperProps & { onClose
                         error={form.errors.password}
                         radius="md"
                     />
+                    {type === 'login' && (
+                        <ForgetPasswordModel />
+                    )}
 
                     {type === 'register' && (
                         <Checkbox
