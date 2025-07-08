@@ -1,6 +1,6 @@
 import { useDisclosure } from '@mantine/hooks';
 import { Modal, Anchor } from '@mantine/core';
-import { ForgetPassword } from './forgetPassword';
+import { ForgetPassword } from './ForgetPassword';
 
 export function ForgetPasswordModel() {
     const [opened, { open, close }] = useDisclosure(false);
