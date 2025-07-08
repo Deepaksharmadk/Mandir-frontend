@@ -25,7 +25,12 @@ export interface AuthResponse {
         // Add other user fields if needed
     };
 }
-
+export interface ForgotPasswordRequest {
+    email: string;
+}
+export interface ForgotPasswordResponse {
+    message: string;
+}
 export const userApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         getProfile: builder.query<void, void>({
@@ -59,9 +64,17 @@ export const userApi = baseApi.injectEndpoints({
                 url: "/api/v1/auth/logout",
                 method: "POST",
                 // 🔥 Important: send cookies
-                // withCredentials: true,
-                // withCredentials: true,
-                credentials: "include",
+                withCredentials: true,
+            }),
+        }),
+        forgotPassword: builder.mutation<
+            ForgotPasswordResponse,
+            ForgotPasswordRequest
+        >({
+            query: (body) => ({
+                url: "/api/v1/auth/forgot-password",
+                method: "POST",
+                data: body,
             }),
         }),
     }),
@@ -73,4 +86,5 @@ export const {
     useLoginEmailMutation,
     useLogoutUserMutation,
     useGetProfileQuery,
+    useForgotPasswordMutation,
 } = userApi;

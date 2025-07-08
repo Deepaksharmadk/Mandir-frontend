@@ -14,7 +14,7 @@ import {
 } from '@mantine/core';
 import type { PaperProps } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { upperFirst, useToggle } from '@mantine/hooks';
+import { upperFirst, useDisclosure, useToggle } from '@mantine/hooks';
 import { GoogleButton } from './GoogleButton';
 import { useRegisterEmailMutation, useLoginEmailMutation } from '../../store/api/userApi';
 import { GoogleLogin, type CredentialResponse } from '@react-oauth/google';
@@ -32,7 +32,10 @@ import { notifications } from '@mantine/notifications';
 import { useNavigate } from 'react-router-dom';
 import { ForgetPasswordModel } from './ForgetPasswordModel';
 
+
 export function AuthenticationForm({ onClose, ...props }: PaperProps & { onClose?: () => void }) {
+    const [forgotPasswordOpened, { open: openForgotPassword, close: closeForgotPassword }] = useDisclosure(false);
+
     const navigate = useNavigate()
     const googleRef = useRef<HTMLDivElement>(null);
     const dispatch = useDispatch<AppDispatch>()
@@ -123,29 +126,32 @@ export function AuthenticationForm({ onClose, ...props }: PaperProps & { onClose
                 }
 
             } else {
-                result = await loginEmail({
-                    email: values.email,
-                    password: values.password,
-                }).unwrap()
+                if (type === 'login') {
+                    result = await loginEmail({
+                        email: values.email,
+                        password: values.password,
+                    }).unwrap()
 
-                dispatch(setUser({
-                    _id: result.user.id,
-                    name: result.user.name,
-                    email: result.user.email,
-                    picture: result.user.picture || '',
-                    role: result.user.role || 'User',
-                }))
-                console.log('Navigating to /');
-                onClose?.(); // ✅ Close modal
-                navigate('/login');
-                // Show success toast or redirect
-                notifications.show({
-                    title: result?.massage || 'Login Successfully',
-                    message: ` Wellcome ${result.user.name}`,
-                    color: 'green',
-                    icon: <IconCheck />,
-                });
-                navigate('/');
+                    dispatch(setUser({
+                        _id: result.user.id,
+                        name: result.user.name,
+                        email: result.user.email,
+                        picture: result.user.picture || '',
+                        role: result.user.role || 'User',
+                    }))
+                    console.log('Navigating to /');
+                    onClose?.(); // ✅ Close modal
+                    navigate('/login');
+                    // Show success toast or redirect
+                    notifications.show({
+                        title: result?.massage || 'Login Successfully',
+                        message: ` Wellcome ${result.user.name}`,
+                        color: 'green',
+                        icon: <IconCheck />,
+                    });
+                    navigate('/');
+                }
+
 
             }
         } catch (loginErr: unknown) {
@@ -227,9 +233,7 @@ export function AuthenticationForm({ onClose, ...props }: PaperProps & { onClose
                         error={form.errors.password}
                         radius="md"
                     />
-                    {type === 'login' && (
-                        <ForgetPasswordModel />
-                    )}
+
 
                     {type === 'register' && (
                         <Checkbox
@@ -246,11 +250,24 @@ export function AuthenticationForm({ onClose, ...props }: PaperProps & { onClose
                             ? 'Already have an account? Login'
                             : "Don't have an account? Register"}
                     </Anchor>
+
                     <Button type="submit" radius="xl" loading={isRegistering || isLoggingIn}>
                         {upperFirst(type)}
                     </Button>
                 </Group>
+
             </form>
+            {/* 💡 Forget Password Trigger: OUTSIDE form */}
+            {type === 'login' && (
+                <Group justify="end" mt="xs">
+                    <Anchor component="button" onClick={openForgotPassword} size="xs" c="dimmed">
+                        Forgot password?
+                    </Anchor>
+                </Group>
+            )}
+
+            {/* 💡 Forget Password Modal OUTSIDE form too */}
+            <ForgetPasswordModel opened={forgotPasswordOpened} onClose={closeForgotPassword} />
         </Paper>
     );
 }

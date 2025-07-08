@@ -1,20 +1,16 @@
-import { useDisclosure } from '@mantine/hooks';
-import { Modal, Anchor } from '@mantine/core';
+import { Modal } from '@mantine/core';
 import { ForgetPassword } from './ForgetPassword';
 
-export function ForgetPasswordModel() {
-    const [opened, { open, close }] = useDisclosure(false);
-
+export function ForgetPasswordModel({
+    opened,
+    onClose,
+}: {
+    opened: boolean;
+    onClose: () => void;
+}) {
     return (
-        <>
-            <Modal opened={opened} onClose={close} title="Forget Password" centered>
-                {/* Modal content */}
-                <ForgetPassword onClose={close} />
-            </Modal>
-
-            <Anchor component="button" variant="default" onClick={open}>
-                Forget Password
-            </Anchor>
-        </>
+        <Modal opened={opened} onClose={onClose} title="Forget Password" centered>
+            <ForgetPassword onClose={onClose} />
+        </Modal>
     );
 }

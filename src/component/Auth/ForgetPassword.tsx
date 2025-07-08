@@ -1,7 +1,12 @@
 import { Button, Group, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import { useForgotPasswordMutation } from '../../store/api/userApi';
+import { notifications } from '@mantine/notifications';
+import { IconCheck, IconChecks } from '@tabler/icons-react';
 
 export function ForgetPassword({ onClose }: { onClose: () => void }) {
+    const [forgotPassword] = useForgotPasswordMutation()
+
     const form = useForm({
         mode: 'uncontrolled',
         initialValues: {
@@ -13,9 +18,29 @@ export function ForgetPassword({ onClose }: { onClose: () => void }) {
             email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
         },
     });
-    const handleSubmit = (values: { email: string }) => {
-        console.log('Submitted email:', values.email);
-        onClose();
+    const handleSubmit = async (values: { email: string }) => {
+        try {
+            console.log('Submitted email:', values.email);
+            const response = await forgotPassword({ email: values.email }).unwrap();
+            console.log('Response:', response.message);
+            form.reset();
+            onClose();
+
+            notifications.show({
+                // title: response?.message || 'Login Successfully',
+                message: response.message,
+                color: 'green',
+                icon: <IconCheck />,
+            });
+        } catch (error) {
+            const err = error as { data?: { errors?: string[] } };
+            notifications.show({
+                message: err?.data?.errors?.[0] || 'Pllease enter valid email',
+                color: 'red',
+                icon: <IconChecks />,
+            });
+            console.error('Error submitting form:', error);
+        }
     };
     return (
         <form onSubmit={form.onSubmit(handleSubmit)}>
