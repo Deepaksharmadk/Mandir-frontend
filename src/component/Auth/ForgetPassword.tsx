@@ -4,10 +4,11 @@ import { useForgotPasswordMutation } from '../../store/api/userApi';
 import { notifications } from '@mantine/notifications';
 import { IconCheck, IconChecks } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
+import { PleaseWait } from './PleaseWait';
 
 export function ForgetPassword({ onClose }: { onClose: () => void }) {
     const navigate = useNavigate();
-    const [forgotPassword] = useForgotPasswordMutation()
+    const [forgotPassword, { isLoading }] = useForgotPasswordMutation()
 
     const form = useForm({
         mode: 'uncontrolled',
@@ -47,6 +48,9 @@ export function ForgetPassword({ onClose }: { onClose: () => void }) {
             console.error('Error submitting form:', error);
         }
     };
+    if (isLoading) {
+        return <PleaseWait />;
+    }
     return (
         <form onSubmit={form.onSubmit(handleSubmit)}>
             <TextInput

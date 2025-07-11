@@ -13,6 +13,10 @@ import { useForm } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
 import { IconCheck, IconX } from '@tabler/icons-react';
 import { useResetPasswordMutation } from '../../store/api/userApi';
+import { useNavigate } from 'react-router-dom';
+import { PleaseWait } from './PleaseWait';
+import { useLocation } from 'react-router-dom';
+
 
 export interface ChangePasswordFormProps extends PaperProps {
     onSuccess?: () => void;
@@ -20,9 +24,14 @@ export interface ChangePasswordFormProps extends PaperProps {
 
 export function ChangePasswordForm({ onSuccess, ...props }: ChangePasswordFormProps) {
     const [resetPassword, { isLoading }] = useResetPasswordMutation();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const passedEmail = location.state?.email || '';
+    console.log('Passed email:', passedEmail);
+
 
     const form = useForm({
-        initialValues: { email: '', otp: '', password: '' },
+        initialValues: { email: passedEmail, otp: '', password: '' },
         validate: {
             email: (value) =>
                 value.trim().length === 0
@@ -58,6 +67,7 @@ export function ChangePasswordForm({ onSuccess, ...props }: ChangePasswordFormPr
 
             form.reset();
             onSuccess?.();
+            navigate('/');
         } catch (err: any) {
             const errorMsg =
                 err?.data?.message || 'Failed to change password. Please try again.';
@@ -69,6 +79,9 @@ export function ChangePasswordForm({ onSuccess, ...props }: ChangePasswordFormPr
             });
         }
     };
+    if (isLoading) {
+        return <PleaseWait />;
+    }
 
     return (
         <Paper radius="md" p="lg" withBorder {...props}>
