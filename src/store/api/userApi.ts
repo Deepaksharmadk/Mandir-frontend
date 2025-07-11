@@ -72,7 +72,7 @@ export const userApi = baseApi.injectEndpoints({
             ForgotPasswordRequest
         >({
             query: (body) => ({
-                url: "/api/v1/auth/forgot_password",
+                url: "/api/v1/auth/forgot/password",
                 method: "POST",
                 data: body,
             }),
@@ -82,7 +82,7 @@ export const userApi = baseApi.injectEndpoints({
             ForgotPasswordRequest
         >({
             query: (body) => ({
-                url: "/api/v1/auth/reset_password",
+                url: "/api/v1/auth/reset/password",
                 method: "POST",
                 data: body,
             }),
