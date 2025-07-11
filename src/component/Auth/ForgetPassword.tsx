@@ -3,8 +3,10 @@ import { useForm } from '@mantine/form';
 import { useForgotPasswordMutation } from '../../store/api/userApi';
 import { notifications } from '@mantine/notifications';
 import { IconCheck, IconChecks } from '@tabler/icons-react';
+import { useNavigate } from 'react-router-dom';
 
 export function ForgetPassword({ onClose }: { onClose: () => void }) {
+    const navigate = useNavigate();
     const [forgotPassword] = useForgotPasswordMutation()
 
     const form = useForm({
@@ -24,6 +26,9 @@ export function ForgetPassword({ onClose }: { onClose: () => void }) {
             const response = await forgotPassword({ email: values.email }).unwrap();
             console.log('Response:', response.message);
             form.reset();
+            navigate('/change-password', {
+                state: { email: values.email },
+            });
             onClose();
 
             notifications.show({

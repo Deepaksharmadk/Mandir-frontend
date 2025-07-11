@@ -77,6 +77,16 @@ export const userApi = baseApi.injectEndpoints({
                 data: body,
             }),
         }),
+        resetPassword: builder.mutation<
+            ForgotPasswordResponse,
+            ForgotPasswordRequest
+        >({
+            query: (body) => ({
+                url: "/api/v1/auth/reset-password",
+                method: "POST",
+                data: body,
+            }),
+        }),
     }),
     overrideExisting: false,
 });
@@ -87,4 +97,5 @@ export const {
     useLogoutUserMutation,
     useGetProfileQuery,
     useForgotPasswordMutation,
+    useResetPasswordMutation,
 } = userApi;

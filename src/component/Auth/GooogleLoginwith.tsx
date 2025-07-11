@@ -34,7 +34,8 @@ import { ForgetPasswordModel } from './ForgetPasswordModel';
 
 
 export function AuthenticationForm({ onClose, ...props }: PaperProps & { onClose?: () => void }) {
-    const [forgotPasswordOpened, { open: openForgotPassword, close: closeForgotPassword }] = useDisclosure(false);
+    const [forgotPasswordOpened, { open: openFP, close: closeFP }] = useDisclosure(false);
+
 
     const navigate = useNavigate()
     const googleRef = useRef<HTMLDivElement>(null);
@@ -89,6 +90,11 @@ export function AuthenticationForm({ onClose, ...props }: PaperProps & { onClose
             console.error('Google login failed', err)
         }
     }
+    // helper to close both forget‐password AND auth modal
+    const closeAll = () => {
+        closeFP();      // close the ForgetPasswordModel
+        onClose?.();   // then close the AuthenticationForm modal
+    };
 
     const handleSubmit = async (values: typeof form.values) => {
         try {
@@ -260,14 +266,14 @@ export function AuthenticationForm({ onClose, ...props }: PaperProps & { onClose
             {/* 💡 Forget Password Trigger: OUTSIDE form */}
             {type === 'login' && (
                 <Group justify="end" mt="xs">
-                    <Anchor component="button" onClick={openForgotPassword} size="xs" c="dimmed">
+                    <Anchor component="button" onClick={openFP} size="xs" c="dimmed">
                         Forgot password?
                     </Anchor>
                 </Group>
             )}
 
             {/* 💡 Forget Password Modal OUTSIDE form too */}
-            <ForgetPasswordModel opened={forgotPasswordOpened} onClose={closeForgotPassword} />
+            <ForgetPasswordModel opened={forgotPasswordOpened} onClose={closeAll} />
         </Paper>
     );
 }

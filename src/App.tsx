@@ -5,6 +5,7 @@ import { CarouselDemo } from './component/Carousel/CarouselComponent'
 import { AuthenticationForm } from './component/Auth/GooogleLoginwith'
 import { useGetAllImagesQuery } from './store/api/imageApi'
 import { Loader } from '@mantine/core'
+import { ChangePasswordForm } from './component/Auth/ChangePassword'
 
 function App() {
     const { isLoading } = useGetAllImagesQuery();
@@ -23,7 +24,7 @@ function App() {
                         <Route path="/about" element={<p>About</p>} />
                         <Route path="/login" element={<AuthenticationForm />} />
                         <Route path="/gallery" element={<CarouselDemo />} />
-                        <Route path="/dee" element={<p>dee</p>} />
+                        <Route path="/change-password" element={<ChangePasswordForm />} />
 
 
                     </Route>
